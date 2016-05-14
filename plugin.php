@@ -53,10 +53,35 @@ function watf_weight_submit_validation($weight) {
     }
 }
 
-function watf_weight_submit_registration {
+function watf_weight_submit_complete {
     global $reg_errors, $weight;
     if(1 > count($reg_errors->get_error_messages())) {
-        
+        $date = date();
+        $user = get_current_user_id();
+        $earned = $weight;
+        $sql_current = "SELECT current_points FROM " . $table_name . "WHERE user = '". $user . "' ORDER BY date DESC LIMIT 0,1";
+        $currentpoints = $wpdb->get_results($sql_current, OBJECT);
+        $current = $currentpoints + $earned;
+            
+        $sql = "INSERT INTO ".$table_name." (`date`, `user`, `weight`, `earned_points`, `current_points`)
+VALUES
+	(".$date.", ".$user.", ".$weight.", ".$earned.", "$current")";
+        $wpdb->query($sql);
+        echo "Done!";
     }
+}
+
+function watf_weight_submit_function() {
+    if ( isset($_POST['submit'] ) ) {
+        watf_weight_submit_validation($weight);
+        watf_weight_submit_complete($weight);
+        watf_weight_submit_form($weight);
+    }
+}
+add_shortcode("watf_weightsubmit","watf_weight_submit_shortcode");
+function watf_weight_submit_shortcode() {
+    ob_start();
+    watf_weight_submit_function();
+    return ob_get_clean();
 }
 ?>
