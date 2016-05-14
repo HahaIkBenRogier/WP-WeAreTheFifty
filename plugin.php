@@ -40,8 +40,8 @@ function watf_weight_submit_validation($weight) {
     $reg_errors = new WP_Error;
     
     if ( empty($weight)) {
-        $reg_errors->add('field', 'Er is niks ingevuld')
-    }
+        $reg_errors->add('field', 'Er is niks ingevuld');
+    };
     
     if ( is_wp_error( $reg_errors ) ) {
         foreach ( $reg_errors->get_error_messages() as $error ) {
@@ -49,11 +49,11 @@ function watf_weight_submit_validation($weight) {
             echo '<strong>ERROR</strong>:';
             echo $error . '<br/>';
             echo '</div>';
-        }
-    }
-}
+        };
+    };
+};
 
-function watf_weight_submit_complete {
+function watf_weight_submit_complete() {
     global $reg_errors, $weight;
     if(1 > count($reg_errors->get_error_messages())) {
         $date = date();
@@ -65,7 +65,7 @@ function watf_weight_submit_complete {
             
         $sql = "INSERT INTO ".$table_name." (`date`, `user`, `weight`, `earned_points`, `current_points`)
 VALUES
-	(".$date.", ".$user.", ".$weight.", ".$earned.", "$current")";
+	(".$date.", ".$user.", ".$weight.", ".$earned.", ".$current.")";
         $wpdb->query($sql);
         echo "Done!";
     }
