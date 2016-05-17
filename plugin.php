@@ -29,8 +29,8 @@ register_activation_hook(__FILE__, 'watf_weight_install_table');
 function watf_weight_submit_form($weight) {
     echo '
     <form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
-    <label for="weight">Gewicht deze week></label>
-    <input type="number" value="' . ( isset( $_POST['weight'] ) ? $weight : null ) . '">
+    <label for="weight">Gewicht deze week</label>
+    <input type="number" value="' . ( isset( $_POST['weight'] ) ? $weight : null ) . '" id="weight">
      <input type="submit" name="submit" value="Invullen"/>
      </form>';
 }
@@ -68,20 +68,20 @@ VALUES
 	(".$date.", ".$user.", ".$weight.", ".$earned.", ".$current.")";
         $wpdb->query($sql);
         echo "Done!";
-    }
-}
+    };
+};
 
 function watf_weight_submit_function() {
     if ( isset($_POST['submit'] ) ) {
         watf_weight_submit_validation($weight);
         watf_weight_submit_complete($weight);
-        watf_weight_submit_form($weight);
-    }
-}
+    };
+    watf_weight_submit_form($weight);
+};
 add_shortcode("watf_weightsubmit","watf_weight_submit_shortcode");
 function watf_weight_submit_shortcode() {
     ob_start();
     watf_weight_submit_function();
     return ob_get_clean();
-}
+};
 ?>
