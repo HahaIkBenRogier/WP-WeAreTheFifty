@@ -6,24 +6,39 @@
 **/
 
 // Installeer tabel
-global $wpdb;
-$table_name = $wpdb->prefix . "watf_weight";
 function watf_weight_install_table() { 
-   if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
-      $sql = "CREATE TABLE " . $table_name . " (
-      id int(11) unsigned NOT NULL AUTO_INCREMENT,
-      date varchar(11) NOT NULL,
-      user varchar(11) NOT NULL,
-      weight int(11) NOT NULL,
-      earned_points varchar(11) NOT NULL,
-      current_points varchar(11) NOT NULL,
-      PRIMARY KEY  (id)
-      );";
-      require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-      dbDelta($sql);
-   }
+    global $wpdb;
+    $table_name = $wpdb->prefix . "watf_weight";
+        if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+          $sql = "CREATE TABLE " . $table_name . " (
+          id int(11) unsigned NOT NULL AUTO_INCREMENT,
+          date int(11) NOT NULL,
+          user int(11) NOT NULL,
+          weight int(11) NOT NULL,
+          PRIMARY KEY  (id)
+          );";
+          require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+          dbDelta($sql);
+    }
 }
 register_activation_hook(__FILE__, 'watf_weight_install_table');
+
+function watf_weight_install_table2() { 
+    global $wpdb;
+    $table_name = $wpdb->prefix . "watf_points";
+        if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+          $sql = "CREATE TABLE " . $table_name . " (
+            `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+            `user` int(11) DEFAULT NULL,
+            `points` int(11) DEFAULT NULL,
+            `lastlogin` int(11) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+          );";
+          require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+          dbDelta($sql);
+    }
+}
+register_activation_hook(__FILE__, 'watf_weight_install_table2');
 
 // Invoerveld gewicht
 function watf_weight_submit_form() {
@@ -55,19 +70,30 @@ function watf_weight_submit_validation($weight) {
 
 function watf_weight_submit_complete($passedvar) {
     global $wpdb;
-    $table_name = $wpdb->prefix . "watf_weight";
+    $table_weight = $wpdb->prefix . "watf_weight";
+    $table_points = $wpdb->prefix . "watf_points";
     global $reg_errors, $weight;
     if(1 > count($reg_errors->get_error_messages())) {
         $date = time();
         $user = get_current_user_id();
         $weight = $passedvar;
-        $earned = $weight;
-        $sql_current = "SELECT current_points FROM " . $table_name . " WHERE user = '". $user . "' ORDER BY date DESC LIMIT 0,1";
-        global $wpdb;
-        $currentpoints = $wpdb->get_var($sql_current, ARRAY_A);
-        $current = $currentpoints;
-        $sql = "INSERT INTO ".$table_name." (`date`, `user`, `weight`, `earned_points`, `current_points`) VALUES ('".$date."', '".$user."', '".$weight."', '".$earned."', '".$current."')";
-        $wpdb->query($sql);
+        $points_new = $weight * 2;
+        $sql_w = "INSERT INTO ".$table_weight." (`date`, `user`, `weight`) VALUES ('".$date."', '".$user."', '".$weight."')";
+        
+        //// Ding
+        
+        $result = $wpdb->get_results ("SELECT id FROM ".$table_points." WHERE user = '".$user."'");
+
+        if (count ($result) > 0) {
+            $row = current ($result);
+            $wpdb->query ("UPDATE ".$table_points." SET points = points + ".$points_new.", lastlogin = ".$date." WHERE user = '".$user."'");
+        } else {
+            $wpdb->query ("INSERT INTO ".$table_points." (user, points, lastlogin) VALUES ('".$user."', '".$points_new."', '".$date."')");
+        }
+        
+        //// Ding
+        
+        $wpdb->query($sql_w);
         echo "Done!";
     };
 };
