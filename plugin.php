@@ -26,13 +26,13 @@ function watf_weight_install_table() {
 register_activation_hook(__FILE__, 'watf_weight_install_table');
 
 // Invoerveld gewicht
-function watf_weight_submit_form($weight) {
+function watf_weight_submit_form() {
     echo '
     <form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
     <label for="weight">Gewicht deze week</label>
-    <input type="number" value="' . ( isset( $_POST['weight'] ) ? $weight : null ) . '" id="weight">
-     <input type="submit" name="submit" value="Invullen"/>
-     </form>';
+    <input type="number" value="' . ( isset( $_POST['weight'] )) . '" name="weight">
+    <input type="submit" name="submit" value="Invullen"/>
+    </form>';
 }
 
 function watf_weight_submit_validation($weight) {
@@ -53,19 +53,20 @@ function watf_weight_submit_validation($weight) {
     };
 };
 
-function watf_weight_submit_complete() {
+function watf_weight_submit_complete($passedvar) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . "watf_weight";
     global $reg_errors, $weight;
     if(1 > count($reg_errors->get_error_messages())) {
-        $date = date();
+        $date = time();
         $user = get_current_user_id();
+        $weight = $passedvar;
         $earned = $weight;
-        $sql_current = "SELECT current_points FROM " . $table_name . "WHERE user = '". $user . "' ORDER BY date DESC LIMIT 0,1";
-        $currentpoints = $wpdb->get_results($sql_current, OBJECT);
-        $current = $currentpoints + $earned;
-            
-        $sql = "INSERT INTO ".$table_name." (`date`, `user`, `weight`, `earned_points`, `current_points`)
-VALUES
-	(".$date.", ".$user.", ".$weight.", ".$earned.", ".$current.")";
+        $sql_current = "SELECT current_points FROM " . $table_name . " WHERE user = '". $user . "' ORDER BY date DESC LIMIT 0,1";
+        global $wpdb;
+        $currentpoints = $wpdb->get_var($sql_current, ARRAY_A);
+        $current = $currentpoints;
+        $sql = "INSERT INTO ".$table_name." (`date`, `user`, `weight`, `earned_points`, `current_points`) VALUES ('".$date."', '".$user."', '".$weight."', '".$earned."', '".$current."')";
         $wpdb->query($sql);
         echo "Done!";
     };
@@ -73,10 +74,10 @@ VALUES
 
 function watf_weight_submit_function() {
     if ( isset($_POST['submit'] ) ) {
-        watf_weight_submit_validation($weight);
-        watf_weight_submit_complete($weight);
+        watf_weight_submit_validation($_POST['weight']);
+        watf_weight_submit_complete($_POST['weight']);
     };
-    watf_weight_submit_form($weight);
+    watf_weight_submit_form();
 };
 add_shortcode("watf_weightsubmit","watf_weight_submit_shortcode");
 function watf_weight_submit_shortcode() {
