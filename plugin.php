@@ -41,6 +41,17 @@ function watf_weight_install_table2() {
 register_activation_hook(__FILE__, 'watf_weight_install_table2');
 
 // Invoerveld gewicht
+add_filter( 'mycred_setup_hooks', 'watf_weight_submit_points_hook' );
+function watf_weight_submit_points_hook( $installed )
+{
+	$installed['hook_id'] = array(
+		'title'       => __( 'WATF Hook', 'textdomain' ),
+		'description' => __( 'Koppelt WATF Punten aan MyCRED', 'textdomain' ),
+		'callback'    => array( 'Hook_Class' )
+	);
+	return $installed;
+};
+
 function watf_weight_submit_form() {
     if ( !is_user_logged_in() ) {
         echo "Je bent niet ingelogd!";
