@@ -13,7 +13,7 @@ function watf_weight_install_table() {
           $sql = "CREATE TABLE " . $table_name . " (
           id int(11) unsigned NOT NULL AUTO_INCREMENT,
           date int(11) NOT NULL,
-          user int(11) NOT NULL,
+          user int(11) NOT NULL, 
           weight int(11) NOT NULL,
           PRIMARY KEY  (id)
           );";
