@@ -114,120 +114,120 @@ function watf_weight_graph_html() {
     
     echo    ' <canvas id="myChart" width="400" height="400"></canvas>';
     echo    '<script>
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: ["Red", "Red", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [
-            {
-                label: "Jouw",
-                backgroundColor: "rgba(255, 139, 46, 0.4)",
-                borderColor: "rgba(255, 139, 46, 1)",
-                borderCapStyle: "butt",
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: "miter",
-                pointBorderColor: "rgba(255, 139, 46, 1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(255, 139, 46, 1)",
-                pointHoverBorderColor: "rgba(255, 139, 46, 1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [36, 30, 31.5, 30, 25, 21]
-            },
-             {
-                label: "Buurt",
-                backgroundColor: "rgba(23, 198, 155, 0.4)",
-                borderColor: "rgba(23, 198, 155, 1)",
-                borderCapStyle: "butt",
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: "miter",
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(23, 198, 155, 1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [40, 36, 37, 31, 27, 25]
-            },
-            {
-                label: "Stad",
-                backgroundColor: "rgba(23, 198, 155, 0.4)",
-                borderColor: "rgba(23, 198, 155, 1)",
-                borderCapStyle: "butt",
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: "miter",
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(23, 198, 155, 1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [35, 30, 32, 31, 29, 30]
-            },
-            {
-                label: "Provincie",
-                backgroundColor: "rgba(23, 198, 155, 0.4)",
-                borderColor: "rgba(23, 198, 155, 1)",
-                borderCapStyle: "butt",
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: "miter",
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(23, 198, 155, 1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [10, 25, 3.6, 1, 9, 7]
-            },
-            {
-                label: "Nederland",
-                backgroundColor: "rgba(49, 49, 49, 0.4)",
-                borderColor: "rgba(49, 49, 49, 1)",
-                borderCapStyle: "butt",
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: "miter",
-                pointBorderColor: "rgba(49, 49, 49, 1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(49, 49, 49, 1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [12, 19, 3, 5, 2, 3]
-            }
-        ]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-</script>';
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: ["Red", "Red", "Yellow", "Green", "Purple", "Orange"],
+                        datasets: [
+                            {
+                                label: "Jouw",
+                                backgroundColor: "rgba(255, 139, 46, 0.4)",
+                                borderColor: "rgba(255, 139, 46, 1)",
+                                borderCapStyle: "butt",
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: "miter",
+                                pointBorderColor: "rgba(255, 139, 46, 1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(255, 139, 46, 1)",
+                                pointHoverBorderColor: "rgba(255, 139, 46, 1)",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: [36, 30, 31.5, 30, 25, 21]
+                            },
+                             {
+                                label: "Buurt",
+                                backgroundColor: "rgba(23, 198, 155, 0.4)",
+                                borderColor: "rgba(23, 198, 155, 1)",
+                                borderCapStyle: "butt",
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: "miter",
+                                pointBorderColor: "rgba(75,192,192,1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(23, 198, 155, 1)",
+                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: [40, 36, 37, 31, 27, 25]
+                            },
+                            {
+                                label: "Stad",
+                                backgroundColor: "rgba(23, 198, 155, 0.4)",
+                                borderColor: "rgba(23, 198, 155, 1)",
+                                borderCapStyle: "butt",
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: "miter",
+                                pointBorderColor: "rgba(75,192,192,1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(23, 198, 155, 1)",
+                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: [35, 30, 32, 31, 29, 30]
+                            },
+                            {
+                                label: "Provincie",
+                                backgroundColor: "rgba(23, 198, 155, 0.4)",
+                                borderColor: "rgba(23, 198, 155, 1)",
+                                borderCapStyle: "butt",
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: "miter",
+                                pointBorderColor: "rgba(75,192,192,1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(23, 198, 155, 1)",
+                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: [10, 25, 3.6, 1, 9, 7]
+                            },
+                            {
+                                label: "Nederland",
+                                backgroundColor: "rgba(49, 49, 49, 0.4)",
+                                borderColor: "rgba(49, 49, 49, 1)",
+                                borderCapStyle: "butt",
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: "miter",
+                                pointBorderColor: "rgba(49, 49, 49, 1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(49, 49, 49, 1)",
+                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: [12, 19, 3, 5, 2, 3]
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>';
 };
 
 add_shortcode("watf_personalgraph","watf_weight_graph_shortcode");
