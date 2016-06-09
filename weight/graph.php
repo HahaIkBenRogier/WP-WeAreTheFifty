@@ -11,6 +11,12 @@ function watf_weight_graph_html() {
     // Persoonlijk profiel
     $result_personal = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` = ".$user);
       print_r($result_personal);
+      $array_personal_all = array();
+      foreach ($result_personal as $object) {
+        $array_personal_all[] = $object->weight;
+      }
+      $average_personal_all = array_sum($array_personal_all) / count($array_personal_all);
+      echo $average_personal_all;
     $result_profile = $wpdb->get_results ("SELECT * FROM ".$table_profile." WHERE `user` = ".$user);
       foreach($result_profile as $object){
           $straat = $object->Street;
@@ -30,7 +36,7 @@ function watf_weight_graph_html() {
       }
       $string_neighbourhood = rtrim(implode(',', $users_neighbourhood), ',');
     $result_neighbourhood = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_neighbourhood.")");
-      print_r($result_neighbourhood);
+      //print_r($result_neighbourhood);
 
     // Stad profiel
     $search_city = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `City` = '".$stad."'");
@@ -40,7 +46,7 @@ function watf_weight_graph_html() {
       }
       $string_city = rtrim(implode(',', $users_city), ',');
     $result_city = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_city.")");
-      print_r($result_city);
+      //print_r($result_city);
 
     // Provincie profiel
       $search_state = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `State` = '".$provincie."'");
@@ -50,7 +56,7 @@ function watf_weight_graph_html() {
         }
         $string_state = rtrim(implode(',', $users_state), ',');
       $result_state = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_state.")");
-        print_r($result_state);
+        //print_r($result_state);
 
       // Woningcorp profiel
       if (!empty($woningcorperatie)) {
@@ -61,12 +67,11 @@ function watf_weight_graph_html() {
           }
           $string_housing = rtrim(implode(',', $users_housing), ',');
         $result_housing = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_housing.")");
-          print_r($result_housing);
+          //print_r($result_housing);
 
       }
-
-
-    $result_all = $wpdb->get_results ("SELECT * FROM ".$table_weight);
+      // Alle profielen
+      $result_all = $wpdb->get_results ("SELECT * FROM ".$table_weight);
 
 
 
