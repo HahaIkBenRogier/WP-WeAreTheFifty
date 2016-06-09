@@ -20,8 +20,7 @@ function watf_weight_install_table() {
           `weight` int(11) NOT NULL,
           `earned_points` int(11) NOT NULL,
           `current_points` int(11) NOT NULL,
-          PRIMARY KEY (`id`),
-          UNIQUE KEY `user` (`user`)
+          PRIMARY KEY (`id`)
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
           require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
           dbDelta($sql);
@@ -77,7 +76,7 @@ function watf_add_styles_scripts() {
 }
 
 if( ! class_exists( 'Smashing_Updater' ) ){
-	include_once( plugin_dir_path( __FILE__ ) . 'update.php' );
+	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
 };
 $updater = new Smashing_Updater( __FILE__ );
 $updater->set_username( 'HahaIkBenRogier' );
