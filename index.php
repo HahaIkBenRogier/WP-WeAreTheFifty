@@ -76,4 +76,13 @@ function watf_add_styles_scripts() {
     wp_enqueue_script('chartjs-style','https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.bundle.min.js');
 }
 
+if( ! class_exists( 'Smashing_Updater' ) ){
+	include_once( plugin_dir_path( __FILE__ ) . 'update.php' );
+};
+$updater = new Smashing_Updater( __FILE__ );
+$updater->set_username( 'HahaIkBenRogier' );
+$updater->set_repository( 'WP-WeAreTheFifty' );
+// $updater->authorize( '' ); // Your auth code goes here for private repos
+$updater->initialize();
+
 ?>
