@@ -1,11 +1,30 @@
 <?php
 
+function watf_user_activated() {
+  $user = get_current_user_id();
+  global $wpdb;
+  $table_profile = $wpdb->prefix . "watf_users";
+
+  $result_activated = $wpdb->get_results ("SELECT `activated` FROM ".$table_profile." WHERE `user` = ".$user);
+  foreach ($result_activated as $value) {
+    $activated = $value->activated;
+  }
+  if (empty($activated)) {
+    return "No";
+  } elseif ($activated = 1) {
+    return "Yes";
+  }
+}
+
 // Invoerveld gewicht
 function watf_weight_submit_form() {
     if ( !is_user_logged_in() ) {
         echo "Je bent niet ingelogd!";
         auth_redirect();
-    } else {
+    } elseif (watf_user_activated() == "No") {
+      echo "Je moet je account nog activeren";
+    }
+    else {
          echo '
         <form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
         <label for="weight">Gewicht deze week</label>

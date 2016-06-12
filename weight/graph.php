@@ -12,22 +12,6 @@ function watf_weight_graph_html() {
     // Persoonlijk profiel
     $now = time();
     $thisweek = time()  - (7 * 24 * 60 * 60);
-  /*
-    $result_personal_thisweek = $wpdb->get_results ("SELECT weight FROM ".$table_weight." WHERE `date` BETWEEN ".$thisweek." AND ".$now." AND `user` = ".$user);
-      $array_personal_thisweek = array();
-      foreach ($result_personal_thisweek as $object) {
-        $array_personal_thisweek[] = $object->weight;
-      }
-      $avarage_personal_thisweek = array_sum($array_personal_thisweek) / count($array_personal_thisweek);
-      echo $avarage_personal_thisweek;
-
-    $result_personal_all = $wpdb->get_results ("SELECT weight FROM ".$table_weight." WHERE `user` = ".$user);
-      $array_personal_all = array();
-      foreach ($result_personal_all as $object) {
-        $array_personal_all[] = $object->weight;
-      }
-      $average_personal_all = array_sum($array_personal_all) / count($array_personal_all);
-      echo $average_personal_all; */
 
     $result_profile = $wpdb->get_results ("SELECT * FROM ".$table_profile." WHERE `user` = ".$user);
       foreach($result_profile as $object){
@@ -39,53 +23,6 @@ function watf_weight_graph_html() {
           $woningcorperatie = $object->HousingGroup;
       }
       $thuis = $straat." ".$huisnummer;
-
-
-  /*  // Buurt profiel
-    $search_neighbourhood = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `Neighbourhood` = '".$wijk."'");
-      $users_neighbourhood = array();
-      foreach ($search_neighbourhood as $object) {
-        $users_neighbourhood[] = $object->user;
-      }
-      $string_neighbourhood = rtrim(implode(',', $users_neighbourhood), ',');
-    $result_neighbourhood = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_neighbourhood.")");
-      //print_r($result_neighbourhood);
-
-    // Stad profiel
-    $search_city = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `City` = '".$stad."'");
-      $users_city = array();
-      foreach ($search_city as $object) {
-        $users_city[] = $object->user;
-      }
-      $string_city = rtrim(implode(',', $users_city), ',');
-    $result_city = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_city.")");
-      //print_r($result_city);
-
-    // Provincie profiel
-      $search_state = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `State` = '".$provincie."'");
-        $users_state = array();
-        foreach ($search_state as $object) {
-          $users_state[] = $object->user;
-        }
-        $string_state = rtrim(implode(',', $users_state), ',');
-      $result_state = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_state.")");
-        //print_r($result_state);
-
-      // Woningcorp profiel
-      if (!empty($woningcorperatie)) {
-        $search_housing = $wpdb->get_results ("SELECT `user` FROM ".$table_housing." WHERE `HousingGroup` = '".$woningcorperatie."'");
-          $users_housing = array();
-          foreach ($search_housing as $object) {
-            $users_housing[] = $object->user;
-          }
-          $string_housing = rtrim(implode(',', $users_housing), ',');
-        $result_housing = $wpdb->get_results ("SELECT * FROM ".$table_weight." WHERE `user` in (".$string_housing.")");
-          //print_r($result_housing);
-
-      }
-      // Alle profielen
-      $result_all = $wpdb->get_results ("SELECT * FROM ".$table_weight);
-      */
 
       function watf_sqlsearch_all ($what, $where, $when) {
         global $wpdb;
@@ -102,19 +39,21 @@ function watf_weight_graph_html() {
         $lastmonth = strtotime('2 months ago');
         $thisyear = strtotime('this year');
 
-        if ($what == "personal" && $where == "NULL") {
+        if ($what == "personal") {
           $users_string = $user;
-        } else {
+        }
+        elseif ($what == "all") {
+          $users_search = $wpdb->get_results ("SELECT `user` FROM ".$table_profile."");
+          $users_array= array();
+          foreach ($users_search as $object) {  $users_array[] = $object->user; }
+          $users_string = rtrim(implode(',', $users_array), ',');
+        }
+        else {
           $users_search = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `".$what."` = '".$where."'");
           $users_array= array();
           foreach ($users_search as $object) {  $users_array[] = $object->user; }
           $users_string = rtrim(implode(',', $users_array), ',');
         };
-
-        $users_search = $wpdb->get_results ("SELECT `user` FROM ".$table_profile." WHERE `".$what."` = '".$where."'");
-          $users_array= array();
-          foreach ($users_search as $object) {  $users_array[] = $object->user; }
-          $users_string = rtrim(implode(',', $users_array), ',');
 
           if ($when == "all") {
             $weight_search = $wpdb->get_results ("SELECT `weight` FROM ".$table_weight." WHERE `user` in (".$users_string.")");
@@ -155,8 +94,9 @@ function watf_weight_graph_html() {
         $City_array[] = watf_sqlsearch_all("City", $stad, $value);
         $State_array[] = watf_sqlsearch_all("State", $provincie, $value);
         if (!empty($woningcorperatie)) {
-          $HousingGroup_array = watf_sqlsearch_all("HousingGroup", $woningcorperatie, $value);
+          $HousingGroup_array[] = watf_sqlsearch_all("HousingGroup", $woningcorperatie, $value);
         }
+        $all_array[] = watf_sqlsearch_all("all","NULL", $value);
       }
       $Personal_string = rtrim(implode(',', $Personal_array), ',');
       $Neighbourhood_string = rtrim(implode(',', $Neighbourhood_array), ',');
