@@ -71,33 +71,6 @@ function watf_weight_install_table3() {
 }
 register_activation_hook(__FILE__, 'watf_weight_install_table3');
 
-add_action( 'wp_enqueue_scripts', 'watf_add_styles_scripts' );
-function watf_add_styles_scripts() {
-    wp_enqueue_script('chartjs-style','https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.bundle.min.js');
-
-    wp_enqueue_script("jquery");
-
-		wp_register_script('menu-script', plugins_url('/menu.js', __FILE__) );
-    wp_enqueue_script("menu-script");
-
-    if ( is_page( array( 10, 61 )) ) {
-      wp_register_style('home', plugins_url('homethings.css', __FILE__) );
-      wp_enqueue_style('home');
-    }
-
-/*
-    if ( $_SERVER["REMOTE_ADDR"] == "2a02:a446:6ce9:0:1040:2df8:ff7c:231" ) {
-      wp_register_style('dln', plugins_url('dln.css', __FILE__) );
-      wp_enqueue_style('dln');
-    }
-
-    if ( $_SERVER['HTTP_USER_AGENT'] == "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" ) {
-      wp_register_style('dln', plugins_url('dln.css', __FILE__) );
-      wp_enqueue_style('dln');
-    } */
-
-}
-
 if( ! class_exists( 'Smashing_Updater' ) ){
 	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
 };
