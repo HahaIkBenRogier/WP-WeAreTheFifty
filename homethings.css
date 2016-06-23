@@ -1,0 +1,77 @@
+.full-width-container.main-content-area {
+  padding: 0px !important;
+}
+
+@media (min-width: 1200px) {
+.full-width-container.main-content-area .container {
+    width: 100% !important;
+}
+}
+@media (min-width: 992px) {
+.full-width-container.main-content-area .container {
+    width: 100% !important;
+}
+}
+
+@media (min-width: 768px) {
+.full-width-container.main-content-area .container {
+    width: 100% !important;
+}
+}
+.full-width-container.main-content-area .container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+header.full-width-container.hero-area.accent-background.header-without-excerpt {
+  padding-bottom: 0px;
+}
+
+header.full-width-container.hero-area.accent-background.header-without-excerpt > .container {
+  display: none;
+}
+
+.branding {
+  padding-bottom: 0px !important;
+}
+
+.full-width-container.hero-area.accent-background.header-without-excerpt {
+  padding: 0px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+a.sb-toggle-right.themeora-nav-toggle {
+  margin-top: 50px;
+}
+
+div.navbar-header {
+  margin-left: 41% !important;
+}
+
+@media (min-width: 768px) {
+.row {
+    width: 750px !important;
+}}
+
+@media (min-width: 992px) {
+.row {
+    width: 970px !important;
+}}
+
+@media (min-width: 1200px) {
+.row {
+    width: 1170px !important;
+}}
+
+.row {
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-bottom: 20px !important;
+}
+
+.full-width-container.main-content-area > .container > .full-width-container.hero-area.accent-background.header-without-excerpt {
+  float: none !important;
+}

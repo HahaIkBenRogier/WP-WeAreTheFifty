@@ -90,7 +90,9 @@ function watf_weight_graph_html() {
       $all_array = array();
       foreach ($time_array as $value) {
         $Personal_array[] = watf_sqlsearch_all("personal","NULL",$value);
-        $Neighbourhood_array[] = watf_sqlsearch_all("Neighbourhood", $wijk, $value);
+        if (!empty($wijk)) {
+          $Neighbourhood_array[] = watf_sqlsearch_all("Neighbourhood", $wijk, $value);
+        }
         $City_array[] = watf_sqlsearch_all("City", $stad, $value);
         $State_array[] = watf_sqlsearch_all("State", $provincie, $value);
         if (!empty($woningcorperatie)) {
@@ -135,6 +137,7 @@ echo                       '{
                                 pointHitRadius: 10,
                                 data: ['.$Personal_string.']
                             },';
+                            if (!empty($wijk)) {
     echo                       '{
                                 label: "'.$wijk.'",
                                 borderColor: "rgba(23, 198, 155, 1)",
@@ -152,7 +155,7 @@ echo                       '{
                                 pointRadius: 1,
                                 pointHitRadius: 10,
                                 data: ['.$Neighbourhood_string.']
-                            },';
+                            },'; }
     echo                      '{
                                 label: "'.$stad.'",
                                 borderColor: "rgba(23, 198, 155, 1)",

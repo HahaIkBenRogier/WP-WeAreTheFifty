@@ -1,0 +1,10 @@
+body, h1, h2, h3 {
+  font-family: 'Comic Sans MS' !important;
+  font-style: italic !important;
+  text-decoration: underline !important;
+  color: #ff284d !important;
+}
+
+.accent-background {
+    background-color: #00ff02 !important;
+}

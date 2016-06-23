@@ -11,8 +11,6 @@ function watf_user_activated() {
   }
   if (empty($activated)) {
     return "No";
-  } elseif ($activated = 1) {
-    return "Yes";
   }
 }
 
@@ -22,7 +20,7 @@ function watf_weight_submit_form() {
         echo "Je bent niet ingelogd!";
         auth_redirect();
     } elseif (watf_user_activated() == "No") {
-      echo "Je moet je account nog activeren";
+      echo "Je account moet nog geactiveerd worden";
     }
     else {
          echo '
